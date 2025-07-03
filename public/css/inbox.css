@@ -1,0 +1,123 @@
+    .inbox{
+        display: flex;
+        
+        height: 100vh;
+        background-color: #212529;
+    }
+    .allInbox{
+        background-color: #353b41;
+        height: 100%;
+        width: 30%;
+    }
+    .chat{
+        
+        height: 100%;
+        width: 70%;
+    }
+    .heading{
+        width: 100%;
+        height: 10%;
+        background-color: #313539;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+    .recieverName{
+        padding: 1rem;
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #353b41;
+        font-weight: 600;
+        font-size: 1.3rem;
+        color: white;
+    }
+    .recieverName i{
+        padding: 0.4rem;
+        border: 1px solid #ffffff;
+        border-radius: 50%;
+        margin-right: .3rem;
+        font-size: 0.8rem !important;
+    }
+    
+    #form{
+        width: 100%;
+        padding: 0.5rem;
+    }
+    .formm{
+        background-color: #41484f;
+    }
+    .inForm{
+        display: flex;
+        align-items: center;
+    }
+    .inForm input{
+        color: black;
+        width: 90%;
+        height: 40px !important;
+    }
+    .inForm button{
+        all: unset;
+        padding: 5px;
+        height: 40px !important;
+        background-color: transparent;
+        color: white;
+    }
+    .reciever, .sender{
+        padding: 10px;
+    }
+
+    .msgSR{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.4rem;
+    }
+    .msgSR .s{
+        background-color: #74b2f9 !important;
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+    .msgSR .r{
+        background-color: #338ef6 !important;
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+
+    .sender{
+        display: flex;
+        justify-content: flex-end;
+
+    }
+    .allChats{
+        height: 90%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .oneChat, .allChats a{
+        width: 90%;
+        height: 4rem;
+        padding: 0.5rem;
+        font-size: 600;
+        padding-left: 2rem;
+        margin: 0.5rem;
+        display: flex;
+        align-items: center;
+        background-color: #212529;
+        border-radius: 13px;
+        cursor: pointer;
+    }
+    .oneChat i, .oneChat span{
+        font-size: 1.3rem !important;
+        color: white;
+        margin-right: 0.7rem;
+    }
+
+

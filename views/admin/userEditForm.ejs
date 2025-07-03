@@ -1,0 +1,46 @@
+<% layout("/layout/boilerplate") %>
+<style>
+    @media screen and (max-width: 600px) {
+        form {
+            width: 90% !important;
+        }
+        
+    }
+</style>
+<body>
+    <h1 style="text-align: center; margin-top: 20px;">Update User Info.</h1>
+    <div class="container">
+    <form action="/admin/update/<%= user1._id %>/?_method=PUT" method="post" class="row g-3 needs-validation" novalidate>
+       
+
+        <div class="col-md-4 col-lg-10">
+            <label for="validationCustom02" class="form-label">Username</label>
+            <input type="text" class="form-control" id="validationCustom02" placeholder="your Name" name="user[username]" value="<%= user1.username %>" required>
+            
+        </div>
+
+
+        <div class="col-md-4 col-lg-10">
+            <label for="validationCustomUsername" class="form-label">Email</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="validationCustomUsername" placeholder="email" name="user[email]" value="<%= user1.email %>" required>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-10">
+            <label for="admin" class="form-label">Admin?</label>
+            <div class="input-group has-validation">
+                
+                <select name="user[isAdmin]" id="admin" class="form-control" required>
+                    <option value="false">False</option>
+                    <option value="true" >True</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">update</button>
+        </div>
+    </form>
+</div>
+</body>

@@ -1,0 +1,56 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+    background-color: #FBFBFB;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+form{
+    width: 60%;
+}
+
+.fIN{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+input, textarea{
+    width: 80%;
+    margin: 10px;
+    height: 40px;
+    padding: 5px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    padding-left: 20px;
+}
+
+h1{
+    color: #2D2E2E;
+}
+
+label{
+    align-self: flex-start;
+    font-size: 1.2rem;
+    color: #2D2E2E !important;
+}
+
+
+button{
+    padding: 10px;
+    font-size: 1.3rem;
+    background-color: #2D2E2E ;
+    color: #FBFBFB;
+    border: none;
+    border-radius: 5px;
+    width: 30%;
+    margin-top: 10px;
+    cursor: pointer;
+}

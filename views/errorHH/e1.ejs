@@ -1,0 +1,75 @@
+<% layout("/layout/boilerplate") %>
+<body>
+    <% 
+        let ve = "ValidationError";
+        let commonError = "Error";
+        let db = "MongooseError";
+    %>
+
+    <div class="er1">
+        <% if(err.name === ve) {%>
+                <span class="name">
+                    Oops! you made a mistake!
+                </span>
+                <span>
+                    You entered wrong details!
+                    <br>
+                    error message: <%= err.message %>
+                </span>
+                <form action="/listings">
+                    <div class="fdiv">
+                        <button class="btn btn-primary">
+                            Back to Home?
+                    </button>
+                    </div>
+                </form>
+            <% } else if(err.name === commonError) {%>
+                <span class="name">
+                    Oops! This Page Doesn't Exist!
+                    <br>
+                    error message: <%= err.message %>
+                </span>
+                <form action="/listings">
+                    <div class="fdiv">
+                        <button class="btn btn-primary">
+                            Back to Home?
+                    </button>
+                    </div>
+                </form>
+            <% } else if(err.name === db) {%>
+
+
+            <% %>
+                <span class="name">
+                    Oops! A Database Error!
+                    <br>
+                    error message: <%= err.message %>
+                </span>
+                <form action="/listings">
+                    <div class="fdiv">
+                        <button class="btn btn-primary">
+                            Back to Home?
+                    </button>
+                    </div>
+                </form>
+            <% } else {%>
+
+
+            <span class="name">
+                    Oops! There's an error!
+                    <br>
+                    error Name: <%= err.name %>
+                    <br>
+                    error message: <%= err.message %>
+                </span>
+                <form action="/listings">
+                    <div class="fdiv">
+                        <button class="btn btn-primary">
+                            Back to Home?
+                    </button>
+                    </div>
+                </form>
+            <% } %>
+
+    </div>
+</body>

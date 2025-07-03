@@ -1,0 +1,98 @@
+<% layout("/layout/boilerplate") %>
+
+<style>
+    @media screen and (max-width: 600px) {
+        form {
+            width: 90% !important;
+        }
+        
+    }
+</style>
+
+<body>
+    <h1 style="text-align: center; margin-top: 20px;">Add Destination</h1>
+    <div class="container">
+    <form action="/listings" method="post" class="row g-3 needs-validation" novalidate enctype="multipart/form-data">
+        <div class="col-md-4 col-lg-10">
+            <label for="validationCustom01" class="form-label">Title</label>
+            <input type="text" class="form-control" id="validationCustom01" placeholder="title" name="list[title]" required>
+            <div class="valid-feedback">
+            Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-10">
+            <label for="validationCustom02" class="form-label">Upload Image</label>
+            <input type="file" class="form-control" id="validationCustom02" name="list[image]" >
+            
+        </div>
+        <div class="col-md-4 col-lg-10 ">
+            <label for="validationCustomUsername" class="form-label">Description</label>
+            <div class="input-group has-validation">
+            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Description" name="list[description]" required>
+            <div class="invalid-feedback">
+                Please choose a username.
+            </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-10">
+            <label for="category" class="form-label">category</label>
+            <div class="input-group has-validation">
+            
+            <select name="list[category]" class="form-control">
+                <% for(category of categories) {%>
+                    <option value="<%= category %>"><%= category %></option>
+                <% } %>
+            </select>
+            <div class="invalid-feedback">
+                Please choose a username.
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-5">
+            <label for="validationCustom03" class="form-label">Price</label>
+            <input type="text" class="form-control" id="validationCustom03" placeholder="price??" name="list[price]" required>
+            <div class="invalid-feedback">
+            Please enter a valid price.
+            </div>
+        </div>
+
+
+            <div class="col-md-6 col-lg-10">
+            <label for="validationCustom03" class="form-label">Location</label>
+            <input type="text" class="form-control" id="validationCustom03" placeholder="location??" name="list[location]" required>
+            <div class="invalid-feedback">
+            Please enter a valid price.
+            </div>
+        </div>
+
+            <div class="col-md-6 col-lg-10">
+            <label for="validationCustom03" class="form-label">Country</label>
+            <input type="text" class="form-control" id="validationCustom03" placeholder="country??" name="list[country]" required>
+            <div class="invalid-feedback">
+            Please enter a valid price.
+            </div>
+        </div>
+
+        
+        <div class="col-12">
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+                Agree to terms and conditions
+            </label>
+            <div class="invalid-feedback">
+                You must agree before submitting.
+            </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">add</button>
+        </div>
+    </form>
+</div>
+</body>

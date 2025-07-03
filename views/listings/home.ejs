@@ -1,0 +1,191 @@
+<% layout("/layout/boilerplate") %>
+<style>
+    .search form input{
+        width: 90% !important;
+        background-color: #f0f0f0 !important;
+        padding: 0.8rem !important;
+        margin-right: 0.3rem !important;
+        margin-left: 0.2rem;
+        border-radius: 8px !important;
+    }
+    
+    form{
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .<%=w%>{
+        opacity: 1;
+        border-bottom: 2px solid #2a00a8;
+    }
+    .tax-info{
+        display: none;
+    }
+</style>
+<body>
+
+    <% if (errorMsg) { %>
+  <div class="alert alert-danger"><%= errorMsg %></div>
+<% } %>
+    
+    <!-- <img src="/assets/logo.png" alt="logo" style="width: 150px;"> -->
+
+    
+
+    <div class="filters">
+            <div class="filter mountain">
+                <a href="/listings/?q=mountain">
+                    <div class="icon">
+                        <i class="fa-solid fa-mountain-city"></i>
+                    </div>
+                    <p class="m0p0 ip">Mountain City</p>
+                </a>
+            </div>
+            <div class="filter trending">
+                <a href="/listings/?q=trending">
+                    <div class="icon">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                    <p class="m0p0 ip" >Trending</p>
+                </a>
+            </div>
+            <div class="filter icities">
+                <a href="/listings/?q=icities">
+                    <div class="icon">
+                        <i class="fa-solid fa-city"></i>
+                    </div>
+                    <p class="m0p0 ip">Iconic Cities</p>
+                </a>
+            </div>
+            <div class="filter pools">
+                <a href="/listings/?q=pools">
+                    <div class="icon">
+                        <i class="fa-solid fa-person-swimming"></i>
+                    </div>
+                    <p class="m0p0 ip">Amazing Pools</p>
+                </a>
+            </div>
+            <div class="filter castle">
+                <a href="/listings/?q=castle">
+                    <div class="icon">
+                        <i class="fa-solid fa-chess-rook"></i>
+                    </div>
+                    <p class="m0p0 ip">Castle</p>
+                </a>
+            </div>
+            <div class="filter camping">
+                <a href="/listings/?q=camping">
+                    <div class="icon">
+                        <i class="fa-solid fa-campground"></i>
+                    </div>
+                    <p class="m0p0 ip">Camping</p>
+                </a>
+            </div>
+            <div class="filter farms">
+                <a href="/listings/?q=farms">
+                    <div class="icon">
+                        <i class="fa-solid fa-cow"></i>
+                    </div>
+                    <p class="m0p0 ip">Farms</p>
+                </a>
+            </div>
+            <div class="filter rooms">
+                <a href="/listings/?q=rooms">
+                    <div class="icon">
+                        <i class="fa-solid fa-bed"></i>
+                    </div>
+                    <p class="m0p0 ip">Rooms</p>
+                </a>
+            </div>
+            <div class="filter arctic">
+                <a href="/listings/?q=arctic">
+                    <div class="icon">
+                        <i class="fa-solid fa-snowman"></i>
+                    </div>
+                    <p class="m0p0 ip">Arctic</p>
+                </a>
+            </div>
+            <p style="margin-right: 0.5rem;">
+                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="color: white !important;">Search</a>
+            </p>
+            <div class="row" >
+                <div class="col" >
+                    <div class="collapse multi-collapse" id="multiCollapseExample1" >
+                         <div class="card card-body search" >
+                            <form action="" style="width: 70vw;" class="col-md-4 col-lg-8">
+                                <select name="category" id="" class="form-control" style="width: 20%; padding: 0.75rem !important; margin-right: 0.2rem;">
+                                    <option value="country">Country</option>
+                                    <option value="username">Provided By</option>
+                                    <option value="city">City</option>
+                                    <option value="title">Title</option>
+                                </select>
+                                <input type="text" class="form-control col-lg-8" id="s" placeholder="enter key" name="q" required style="all: unset;">
+                                <button type="submit" style="width: 3rem; height: 3rem;" class="m0p0"><i class="fa-solid fa-magnifying-glass fa-spin "></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-check-reverse form-switch" style="">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+            </div>
+            
+        </div>
+
+        
+
+
+
+    <div class="all">
+
+        
+
+
+            <%for(let list of listings) {%>
+                
+
+                <a href="/listings/<%= list._id %>" style="border-radius: 10px;">
+                    <div class="card eachL" style="width: 20rem; margin: 10px; background-color: transparent;">
+                        <img src="<%= list.image.url %>" class="card-img-top" alt="listing_image">
+                        <div class="card-img-overlay">
+                            
+                        </div>
+                        
+                        <div class="card-body" style="padding: 3px; font-size: 0.8rem; ">
+                            <p class="card-text" style="color: white; margin: 2px;">
+                                <%= list.title %>
+                                <br>
+                                &#8377;<%= list.price.toLocaleString("en-IN") %> /night
+                                <i class="tax-info">&nbsp;+18% GST</i>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            <%}%>
+        
+    </div>
+    
+    
+
+
+<script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    
+    taxSwitch.addEventListener("click", () => {
+        let taxInfo = document.getElementsByClassName("tax-info");
+        
+        for(info of taxInfo){
+            if(info.style.display != "inline") {
+                info.style.display = "inline";
+            } else{
+                info.style.display = "none";
+            }
+            
+        }
+    });
+</script>
+
+
+</body>

@@ -1,0 +1,33 @@
+<% if(success && success.length){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin: 20px; margin-bottom: 0;">
+        <%= success %>
+        <button
+            style="all: unset; margin-left: 10px;" 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+   </div>
+<% } %>
+
+<% if(nfound && nfound.length){ %>
+    
+<% } %>
+
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger " role="alert" style="margin: 20px; margin-bottom: 0;">
+        <%= error[0] %>
+        <button
+            style="all: unset; margin-left: 10px;" 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+   </div>
+<% } %>

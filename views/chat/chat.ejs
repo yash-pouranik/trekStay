@@ -1,0 +1,85 @@
+<% layout("/layout/boilerplate") %>
+
+<style>
+        @media screen and (max-width: 600px) {
+        .allInbox {
+            display: none;
+        }
+        .chat{
+            width: 100%;
+        }
+    }
+
+</style>
+
+
+
+<div class="inbox">
+    <div class="allInbox">
+        <div class="heading">
+            your chats.
+        </div>
+        <div class="allChats">
+            <% if(allChat){ %>
+                <% for(oneChat of allChat) {%>
+                    <% if(user._id.toString() === oneChat.participants[0]._id.toString()) {%>
+                        <a href="/inbox/<%= user._id %>/reciever/<%= oneChat.participants[1]._id %>">
+                        
+                            <div class="oneChat">
+                                <i class="fa-solid fa-user"></i>
+                                <span><%= oneChat.participants[1].username %></span>
+                            </div>
+                        </a>
+                        <% }else {%>
+                            <a href="/inbox/<%= user._id %>/reciever/<%= oneChat.participants[0]._id %>">
+                                <div class="oneChat">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span><%= oneChat.participants[0].username %></span>
+                                </div>
+                            </a>
+                        <% } %>
+                            
+                <% } %>
+            <% } %>
+        </div>
+        
+    </div>
+    <div class="chat">
+        <% if(reciever) {%>
+            <div class="recieverName">
+                <i class="fa-solid fa-user"></i>
+                <%= reciever.username %>
+                <% if(reciever.isAdmin){ %>
+                    <img src="https://res.cloudinary.com/dd1ybjsgl/image/upload/v1750344714/trekStay_DEV/xu2quksdifzu9lrctfvl.png" alt="V" style="width: 19px;">
+                <% } %>
+            </div>
+            <div class="msgSR">
+                <% if (chat && chat.messages.length > 0) { %>
+                    <% chat.messages.forEach(message => { %>
+                    <% if (message.sender._id.toString() === user._id.toString()) { %>
+                        <div class="sender">
+                        <span class="s"><%= message.msg %></span>
+                        </div>
+                    <% } else { %>
+                        <div class="reciever">
+                        <span class="r"><%= message.msg %></span>
+                        </div>
+                    <% } %>
+                    <% }) %>
+                <% } else { %>
+                    <div style="color: white;">No messages yet.</div>
+                <% } %>
+            </div>
+        
+
+            <div class="formm">
+                <form action="" method="post" id="form">
+                    <div class="inForm">
+                        <input type="text" name="msg" id="" placeholder="Type a message">
+                        <button type="submit">send</button>
+                    </div>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</div>

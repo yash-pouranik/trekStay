@@ -1,0 +1,33 @@
+<% layout("/layout/boilerplate") %>
+<style>
+    @media screen and (max-width: 600px) {
+        form {
+            width: 90% !important;
+            margin-left: 1rem !important;
+        }
+        
+    }
+</style>
+<body>
+    <h1 style="text-align: center; margin-top: 40px;"><img src="/assets/trekLogo.png" alt="" style="width: 150px;"><br>Welcome back!</h1>
+    <div class="container" style="all: unset;">
+    <form action="/login" method="post" class="row g-3 needs-validation offset-3" novalidate>
+        <div class="col-md-4 col-lg-10">
+            <label for="un" class="form-label">Username</label>
+            <input type="text" class="form-control" id="un" placeholder="your name" name="username" required>
+        </div>
+
+        <div class="col-md-6 col-lg-10">
+            <label for="pass" class="form-label">Password</label>
+            <input type="password" class="form-control" id="pass" placeholder="your password" name="password" required>
+            <div class="invalid-feedback">
+            Please enter a valid password.
+            </div>
+            <span>not registered yet? <a href="/signup" style="color: rgb(0, 146, 0) !important; font-weight: 600;">Register Here!</a></span>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit" >Login</button>
+        </div>
+    </form>
+</div>
+</body>

@@ -1,0 +1,336 @@
+*:not(i){
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 300;
+  
+}
+
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+a{
+    text-decoration: none !important;
+      color: #2D2E2E !important;
+}
+
+
+
+
+
+image{
+    width: 100px;
+}
+
+
+
+
+.dlt{ 
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 15px;
+    display: none;
+    position: absolute;
+    
+    top: 0;
+    margin: 23rem 28rem;
+}
+.qn{
+    margin: 10px;
+    font-size: 1.3rem;
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ .edit{
+    padding: 6px;
+    font-size: 1.1rem;
+    background-color: #2D2E2E !important;
+    color: #e8e8e8 !important;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.rbtn{
+    color: black;
+    background-color: white;
+}
+
+.edit, .delete{
+    padding: 10px;
+    width: 80%;
+    background-color: #b7ecff;
+    border-radius: 8px;
+    border: none;
+}
+
+/* navbar */
+.navbar{
+    
+    background-color: #ffffff !important;
+}
+
+.nav-link{
+    font-size: 1.2rem;
+    color: #0F0F0F !important;
+}
+
+/* footer */
+footer{
+    background-color: #f0f0f0;
+    margin-top: 30px;
+    padding: 40px;
+    padding-top: 10px;
+    color: black;
+    font-size: 1.2rem;
+}
+footer a{
+    color: white;
+    color: black;
+}
+
+.f-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* for home cards */
+.card img, .oimg {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.283);
+}
+
+.card-img-overlay span{
+    background-color: #000C66;
+    padding: 7px;
+    font-size: 0.8rem;
+    color: white;
+    border-radius: 10px;
+}
+
+/* show route  */
+
+.list img{
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.list{
+    color: #2D2E2E;;
+    padding: 10px;
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    color: black;
+    text-decoration: none;
+    width: 50%;
+
+}
+.list h3, p{
+  color: #2D2E2E !important;
+}
+.list p{
+    font-size: 1.2rem;
+}
+
+
+
+.-id{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0 0 10rem;
+}
+
+@media (max-width: 700px) {
+    .-id{
+        padding: 0;
+    }  
+}
+
+
+.list .desc{
+    margin: 15px 0 15px 0;
+    width: 100%;
+}
+
+
+/* error page */
+.er1{
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.er1 span{
+    font-size: 1.4rem;
+}
+
+.er1 .name{
+    font-size: 2rem;
+}
+
+.fdiv{
+    display: flex;
+    justify-content: center;
+}
+
+.eachL{
+    transition-duration: 0.3s;
+}
+
+.eachL:hover{
+    transform: scale(1.05);
+}
+
+
+.bold600{
+    font-weight: 600;
+}
+
+
+    .filters{
+        display: flex;
+        padding: 2rem 5rem 0 5rem;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .filter{
+        
+        padding: 0 0.2rem 0.2rem 0.2rem;
+        opacity: 0.6;
+        cursor: pointer;
+        
+    }
+    .filter:hover{
+        opacity: 1;
+        border-bottom: 2px solid #2a00a8;
+    }
+    
+    .icon{
+        color: #2a00a8;
+        display: flex;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .form-switch{
+        border-radius: 18px;
+        border: 1px solid black;        
+        padding: 1rem 3.3rem 1rem 1rem !important;
+    }
+
+
+
+    @media (max-width: 768px) {
+    .filters {
+        padding: 1rem;
+        justify-content: center;
+    }
+
+    .filter {
+        width: 30%; /* Or use 45% depending on your layout */
+        text-align: center;
+    }
+
+    .icon, .ip {
+        font-size: 1rem; /* Slightly smaller icons */
+    }
+}
+
+
+
+
+
+#map{
+  height: 30vh;
+  width:100%;
+}
+.d-flex a{
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  color: white !important;
+  height: 2rem !important;
+  width: 2.5rem !important;
+}
+.dltbtn button{
+  position: absolute !important;
+  top: 1rem !important;
+  right: 4rem !important;
+  height: 2rem !important;
+  width: 4.3rem !important;
+  padding: 0.5rem !important;
+}
+
+.dlt {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 1055 !important;
+  color: black !important;
+  display: none !important;
+  max-width: 350px !important;
+  margin: 0 !important;
+  background: #f8f9fa !important; /* Light background */
+  padding: 1.5rem !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+
+
+.overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.637) !important;
+  z-index: 1050 !important;
+  display: none !important;
+}

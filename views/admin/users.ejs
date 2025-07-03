@@ -1,0 +1,45 @@
+<% layout("/layout/boilerplate") %>
+<body>
+    <!-- <img src="/assets/logo.png" alt="logo" style="width: 150px;"> -->
+
+    <div class="all">
+            <%for(let list of listings) {%>
+                
+
+                
+                    <div class="card " style="width: 20rem; margin: 10px; background-color: transparent; flex-wrap: wrap; justify-content: unset;justify-content: flex-start; padding: 5px; background-color: black; color: white ;">
+                        
+                        
+                        <div class="card-body" style="padding: 3px; font-size: 0.8rem; display: flex; justify-content: space-between; padding: 5px; flex-direction: column; color: white;  ">
+                            <div class="data">
+                                    <p class="card-text" style="color: white !important; margin: 2px; display: flex;">
+                                        <%= list.username %>  &nbsp;
+                                        <% if(list.isAdmin) {%>
+                                            <img src="https://res.cloudinary.com/dd1ybjsgl/image/upload/v1750344714/trekStay_DEV/xu2quksdifzu9lrctfvl.png" alt="v" style="width: 15px;">
+                                        <% } %>
+                                    </p>
+
+                                    <p class="card-text" style="color: white !important; margin: 2px;">
+                                        <%= list.email %>
+                                        <br>
+                                        
+                                    </p>
+                            </div>
+                            <div class="manipulations" style="padding: 3px; color: white; display: flex; ">
+                                <a href="/admin/edit/<%= list._id %>" class="" style="color: white !important; margin-top: 10px; "><i class="fa-solid fa-pen border border-secondary rounded " style="padding: 10px;"></i></a>
+                                <br>
+                                <form action="/admin/delete/<%= list._id %>?_method=DELETE" method="post" class="" style="padding: 0;margin: 5px; padding: 5px;">
+                                    <button type="submit" style="background-color: transparent;" class="m0p0 border border-secondary rounded ">
+                                        <i class="fa-solid fa-trash" style="color: red;"></i>    
+                                    </button>
+                                </form>
+                                <a href="/user/<%= list._id %>" class="btn btn-secondary m0p0" style="color: white !important; padding: 0 10px 0 10px; height: 30px; margin-top: 12px;">info</a>
+                            </div>  
+                        </div>
+                    </div>
+                
+            <%}%>
+        
+    </div>
+    
+</body>

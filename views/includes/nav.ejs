@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top shadow" id="navv">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+        <img src="/assets/trekLogo.png" alt="" style="width: 120px;">
+    </a>
+    <button class="navbar-toggler" style="background-color: white; color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="background-color: white; color: white;"></span>
+    </button>
+    <div class="collapse navbar-collapse rightNav" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="/listings">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">Host a Destination</a>
+        </li>
+        
+      </ul>
+    </div>
+
+
+    <div class="collapse navbar-collapse ms-auto" style="justify-content: flex-end;" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if(!currUser) {%>
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="/signup"><b class="bold600">SignUp</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><b class="bold600">Login</b></a>
+          </li>
+        <% } else if(currUser) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/inbox"><b class="bold600"><i class="fa-solid fa-message"></i></b></a>
+          </li>
+
+          <% if(admin && (currPath != "/admin/684b2b5724267d39ccd43085" && currPath != "/admin/684c64644b85db4b250ff726" && currPath != "/admin/684b3793e03810953660202c")) {%>
+            <li class="nav-item">
+            <span class="nav-link">
+              <a href="/admin/<%= currUser._id %>"><b >Manage Users</b></a>
+            </span>
+          </li>
+          <% } %>
+          <li class="nav-item" style="display: flex;">
+            <a href="/user/<%= currUser._id %>">
+              <span class="nav-link  rounded">
+                <i class="fa-solid fa-user fa-bounce"></i>
+                <b class="bold600"><%= currUser.username %> </b>
+                <% if(admin) { %>
+                <img src="https://res.cloudinary.com/dd1ybjsgl/image/upload/v1750344714/trekStay_DEV/xu2quksdifzu9lrctfvl.png" alt="v" style="width: 19px;">
+                <% } %>
+              </span>
+            </a>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">
+               <b class="bold600">Logout</b>
+            </a>
+          </li>
+          
+          
+        <% } %>
+      </ul>
+    </div>
+
+
+  </div>
+</nav>

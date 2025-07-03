@@ -1,0 +1,175 @@
+<% layout("/layout/boilerplate") %>
+<style>
+body { margin: 0; padding: 0; }
+.options{
+  display: flex;
+
+}
+.options a{
+  margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 600px) {
+        form {
+            width: 90% !important;
+        }
+        
+    }
+
+</style>
+<body>
+    <div class="container my-4" style="display: flex; flex-direction: column;">
+
+    <!-- Listing Card -->
+    <div class="card mb-4 shadow">
+      <div class="row g-0">
+        <div class="col-md-5 d-flex align-items-center">
+          <img src="<%= oneList.image.url %>" class="img-fluid rounded-start" alt="listing image" style="width: 100%; object-fit: cover;">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <p class="card-text desc"style="display: flex;">by: <i><%= oneList.owner.username %>&nbsp;</i>
+             <% if(oneList.owner.isAdmin) {%>
+                          <img src="https://res.cloudinary.com/dd1ybjsgl/image/upload/v1750344714/trekStay_DEV/xu2quksdifzu9lrctfvl.png" alt="v" style="width: 20px;">
+            <% } %></p>
+            <h3 class="card-title mb-2"><%= oneList.title %></h3>
+            <p class="card-text desc"><%= oneList.description %></p>
+            <% if(oneList.category) {%>
+              <p class="card-text desc"> Category: <%= oneList.category %></p>
+            <% } %>
+            <p class="card-text mb-1"><strong>Price:</strong> &#8377;<%= oneList.price.toLocaleString("en-IN") %> /night</p>
+            <p class="card-text mb-1"><strong>Location:</strong> <%= oneList.location %></p>
+            <p class="card-text mb-3"><strong>Country:</strong> <%= oneList.country %></p>
+            <p class="card-text mb-3"><strong>More info:</strong> <a href="<%= oneList.moreInfo %>">click here!</a></p>
+            <% if (admin || (currUser && oneList.owner && currUser._id.toString() === oneList.owner._id.toString())) { %>
+              <div class="d-flex dltbtn gap-2">
+                <a href="/listings/<%= oneList._id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+                <button class="btn btn-danger btn-sm delete edit m0p0">Delete</button>
+              </div>
+            <% } %>
+
+            <% if (currUser && currUser.username != oneList.owner.username) { %>
+              <div class="options">
+                <a href="/listings/<%= oneList._id %>/book/<%= currUser._id %>" class="btn btn-primary" style="color: white !important; width: 20%;">Book here!</a>
+                <a href="/inbox/<%= currUser._id %>/reciever/<%= oneList.owner._id %>" class="btn btn-primary" style="color: white !important; width: 20%;">Chat with Owner</a>
+              </div>
+            <% } %>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+    <!-- Review Form Card -->
+    <div class="card mb-4 shadow">
+      <div class="card-body">
+        <h4 class="card-title">Leave A Review</h4>
+        <form action="/listings/<%= oneList._id %>/review" method="post" novalidate class="needs-validation">
+          
+          
+
+
+                    <label for="">Rating</label>
+                    <fieldset class="starability-coinFlip">
+                    
+                      <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                      <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                      <label for="first-rate1" title="Terrible"></label>
+                      <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                      <label for="first-rate2" title="Not good"></label>
+                      <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                      <label for="first-rate3" title="Average"></label>
+                      <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                      <label for="first-rate4" title="Very good"></label>
+                      <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                      <label for="first-rate5" title="Amazing"></label>
+                    </fieldset>
+
+            
+          <div class="mb-3">
+            <label for="review" class="form-label">Write Here!</label>
+            <textarea name="review[comment]" id="review" class="form-control" style="height: 100px;" required></textarea>
+            <div class="invalid-feedback">
+              Please Write Something!
+            </div>
+          </div>
+          <button type="submit" class="btn btn-outline-dark">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- All Reviews Card -->
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <h4 class="card-title">All Reviews</h4>
+        <% if(oneList.reviews.length) { %>
+          <div class="row row-cols-1 row-cols-md-2 g-3">
+            <% for(let r of oneList.reviews) { %>
+              <div class="col">
+                <div class="card h-100 border-success">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted" ><b style="display: flex;"><i>&#8227; <%= r.owner.username %> &nbsp;</i> 
+                      <% if(r.owner.isAdmin) {%>
+                          <img src="https://res.cloudinary.com/dd1ybjsgl/image/upload/v1750344714/trekStay_DEV/xu2quksdifzu9lrctfvl.png" alt="V" style="width: 15px;">
+                      <% } %> </b></h6>
+                    <p class="card-text"><%= r.comment %></p>
+                    <p class="card-text">Posted on: <%= r.createdAt.toDateString() %></p>
+                  </div>
+                  <div class="card-footer">
+                    <p class="starability-result" data-rating="<%= r.rating %>"></p>
+                  </div>
+                  <% if (admin || (currUser && r.owner && currUser._id?.toString() === r.owner._id?.toString())) { %>
+                    <form action="/listings/<%= oneList._id %>/review/<%= r._id %>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn btn-sm btn-dark ms-2 mb-2">Delete</button>
+                    </form>
+                  <% } %>
+
+                </div>
+              </div>
+            <% } %>
+          </div>
+        <% } else { %>
+          <h5 class="text-muted">No Reviews Yet</h5>
+        <% } %>
+      </div>
+    </div>
+
+
+    <div class="overlay" style="display: none;"></div>
+
+    <% if(admin || (currUser && oneList && currUser._id.toString() === oneList.owner._id.toString())) { %>
+    <div class="dlt shadow p-4 bg-light rounded" style="color: black; display: none; max-width: 400px; margin: 30px auto;">
+      <div class="qn mb-3">
+        Are you sure to delete?
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary cancel">Cancel</button>
+        <form action="/listings/<%= oneList._id %>/delete?_method=DELETE" method="post" class="d-inline">
+          <button class="btn btn-danger sure">Sure</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+
+
+    <div class="mapss">
+      <h2>Where you will be,</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <script>
+    const listData = <%- JSON.stringify(oneList) %>;
+    const coordinates = <%- JSON.stringify(oneList.geometry.coordinates) %>;
+  </script>
+  <script src="/js/script.js"></script>
+
+
+      <script>
+        window.mapToken = "<%= process.env.MAP_TOKEN %>";
+    </script>
+    <script src="/js/map.js"></script> 
+  </body>

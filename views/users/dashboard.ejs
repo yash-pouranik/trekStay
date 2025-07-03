@@ -1,0 +1,183 @@
+<% layout("/layout/boilerplate") %>
+
+<style>
+    .gap-2 button{
+        position: absolute ;
+        top: 1rem !important;
+        right: 1rem !important;
+        width: 25% !important;
+        font-size: 0.7rem !important;
+        padding: 0.4rem !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.372) !important;
+    }
+</style>
+<body style="background-color: rgb(33, 33, 33) !important;">
+    <div class="container my-4">
+        <div class="row user-container">
+            <!-- User Info -->
+            <div class="col-12 col-md-4 order-1 order-md-1 d-flex justify-content-center">
+                <div class="card card1 w-100">
+                    <div class="card-body" style="">
+                        <p class="card-text m0p0 btn btn-warning" style="padding: 4px; padding-left: 8px;"><%= user.info.username %></p>
+                        <p class="card-text m0p0" style="">email: <%= user.info.email %></p>
+                        <p class="card-text m0p0">destinations added: <%= user.destinations.length %></p>
+                        <p class="card-text m0p0">reviews added: <%= user.review.length %></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Added -->
+            <div class="col-12 col-md-8 order-2 order-md-2">
+                <div class="card card1 h-100 mb-4">
+                    <div class="card-body allDests">
+                        <p class="card-text m0p0">Reviews Added:</p>
+                        <div class="row g-3">
+                            <% if(user.review.length === 0) { %>
+                                <div class="col-12">
+                                    <div class="alert alert-secondary">No reviews yet.</div>
+                                </div>
+                            <% } %>
+                            <% for(let r of user.review) { %>
+                                <div class="col-12 col-sm-6 col-lg-4">
+                                <% const listingId = user.reviewToListingMap[r._id.toString()]; %>
+                                <% if (listingId) { %>
+                                    <a href="/listings/<%= listingId %>" style="display: block;">
+                                    <div class="card eachL" style="width: 100%; margin: 0; background-color: transparent;">
+                                        <div class="card-body" style="padding: 8px; font-size: 0.9rem;">
+                                        <p class="card-text" style="color: white; margin: 2px;">
+                                            <b><%= r.comment %></b><br>
+                                            <p class="starability-result" data-rating="<%= r.rating %>"></p>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </a>
+                                <% } else { %>
+                                    <div class="card eachL" style="width: 100%; margin: 0; background-color: transparent;">
+                                    <div class="card-body" style="padding: 8px; font-size: 0.9rem;">
+                                        <p class="card-text" style="color: white; margin: 2px;">
+                                        <b><%= r.comment %></b><br>
+                                        <p class="starability-result" data-rating="<%= r.rating %>" style=""></p>
+                                        <span class="text-warning">Destination not found</span>
+                                        </p>
+                                    </div>
+                                    </div>
+                                <% } %>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destinations Added -->
+            <div class="col-12 col-md-8 order-3 order-md-3">
+                <div class="card card1 h-100">
+                    <div class="card-body allDests">
+                        <p class="card-text m0p0">Destinations Added: </p>
+                        <div class="row g-3">
+                            <% if(user.destinations.length === 0) { %>
+                                <div class="col-12">
+                                    <div class="alert alert-secondary">No destinations yet.</div>
+                                </div>
+                            <% } %>
+                            <% for(destination of user.destinations) { %>
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <a href="/listings/<%= destination._id %>" style="border-radius: 10px; display: block;">
+                                    <div class="card eachL" style="width: 100%; margin: 0; background-color: transparent;">
+                                        <img src="<%= destination.image.url %>" class="card-img-top" alt="listing_image">
+                                        <div class="card-body" style="padding: 3px; font-size: 0.8rem;">
+                                            <p class="card-text" style="color: white; margin: 2px;">
+                                                <%= destination.title %>
+                                                <br>
+                                                &#8377;<%= destination.price.toLocaleString("en-IN") %> /night
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings -->
+            <div class="col-12 col-md-8 order-4 order-md-4">
+                <div class="card card1 h-100">
+                    <div class="card-body allDests">
+                        <p class="card-text m0p0">Bookings</p>
+                        <div class="row g-3">
+                            <% if(bookings.length === 0) { %>
+                                <div class="col-12">
+                                    <div class="alert alert-secondary">No Bookings yet.</div>
+                                </div>
+                            <% } %>
+                            <% bookings.forEach(function(booking, idx) { %>
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="card eachL" style="width: 100%; margin: 0; background-color: transparent; position: relative;">
+                                    <% if(admin || (currUser && user && currUser._id.toString() === user.info._id.toString())) { %>
+                                    <!-- Delete Button triggers modal -->
+                                    <button class="btn btn-danger btn-sm delete edit m0p0"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteBookingModal"
+                                            data-action="/listings/<%= user.info._id %>/booking/<%= booking._id %>/delete?_method=DELETE"
+                                            style="position:absolute; top:10px; right:10px; z-index:2; padding: 5px; font-size: 0.7rem; width: 22%;">
+                                        Delete
+                                    </button>
+                                    <% } %>
+                                    <a href="/listings/<%= booking.destination._id %>" style="border-radius: 10px; display: block; z-index:1;">
+                                        <img src="<%= booking.destination.image.url %>" class="card-img-top" alt="listing_image">
+                                        <div class="card-body" style="padding: 3px; font-size: 0.8rem;">
+                                            <p class="card-text" style="color: white; margin: 2px;">
+                                                <%= booking.destination.title %>
+                                                <br>
+                                                &#8377;<%= booking.destination.price.toLocaleString("en-IN") %> /night
+                                            </p>
+                                            <p class="m0p0">from: <%= new Date(booking.from).toLocaleDateString("en-IN", { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                                            <p class="m0p0">to: <%= new Date(booking.to).toLocaleDateString("en-IN", { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                                            <p class="m0p0">joining peoples: <%= booking.numberOfPeople %></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Single Delete Modal for Bookings -->
+    <div class="modal fade" id="deleteBookingModal" tabindex="-1" aria-labelledby="deleteBookingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteBookingModalLabel">Delete Booking</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this booking?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <form id="deleteBookingForm" action="" method="post" class="d-inline">
+              <button class="btn btn-danger sure">Sure</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var deleteBookingModal = document.getElementById('deleteBookingModal');
+      deleteBookingModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var action = button.getAttribute('data-action');
+        var form = document.getElementById('deleteBookingForm');
+        form.action = action;
+      });
+    });
+    </script>
+</body>

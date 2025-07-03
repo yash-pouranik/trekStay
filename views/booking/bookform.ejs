@@ -1,0 +1,77 @@
+<% layout("/layout/boilerplate") %>
+<body>
+    <h1 style="text-align: center; margin-top: 20px;">Book Your Trip</h1>
+    <div class="container">
+    <form action="/listings/<%= id %>/booking/<%= userId %>" method="post" class="row g-3 needs-validation" novalidate>
+       
+
+        <div class="col-md-4 col-lg-10 disabled" >
+            <label for="validationCustom02" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="validationCustom02" placeholder="your Name" name="name" value="<%= user1.username %>" required disabled>
+            
+        </div>
+
+
+        <div class="col-md-4 col-lg-10">
+            <label for="validationCustomUsername" class="form-label">Your Email</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="validationCustomUsername" placeholder="email" name="name" value="<%= user1.email %>" required disabled>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-10">
+            <label for="today" class="form-label">Date From?</label>
+            <div class="input-group has-validation">
+                <input type="date" name="booking[from]" id="today" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-10">
+            <label for="dateFrom" class="form-label">Date To?</label>
+            <div class="input-group has-validation">
+                <input type="date" name="booking[to]" id="nextDayDate" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-10">
+            <label for="dateFrom" class="form-label">Number of People</label>
+            <div class="input-group has-validation">
+                <input type="number" name="booking[numberOfPeople]" id="dateFrom" class="form-control" value="1" min="1" max="10">
+                <div class="invalid-feedback">
+                    Please choose 1-10 only
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">update</button>
+        </div>
+    </form>
+</div>
+<script>
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const formattedToday = `${yyyy}-${mm}-${dd}`;
+
+  document.getElementById('today').value = formattedToday;
+
+
+   document.addEventListener("DOMContentLoaded", function() {
+    const nextDayInput = document.getElementById("nextDayDate");
+    const today = new Date();
+    const nextDay = new Date(today);
+    nextDay.setDate(today.getDate() + 1);
+
+    const year = nextDay.getFullYear();
+    const month = String(nextDay.getMonth() + 1).padStart(2, '0');
+    const day = String(nextDay.getDate()).padStart(2, '0');
+    const nextDayFormatted = `${year}-${month}-${day}`;
+
+    nextDayInput.value = nextDayFormatted;
+  });
+</script>
+</body>
