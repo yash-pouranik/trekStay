@@ -35,7 +35,7 @@ const chat = require("./routes/chatWithHost.js");
 const { isLoggedin } = require("./middlewares.js");
 
 
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = "mongodb://127.0.0.1:27017/trekstay";
 
 async function main() {
     await mongoose.connect(dbUrl);

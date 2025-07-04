@@ -12,11 +12,11 @@ const {isAdmin} = require("../middlewares.js");
 
 router
     .route("/signup")
-    .get(wrapAsync(controller.signupForm))
+    .get((controller.signupForm))
     .post(wrapAsync(controller.signup));
 
 
-router.get("/login", wrapAsync(controller.loginForm));
+router.get("/login", (controller.loginForm));
 
 
 router.post(

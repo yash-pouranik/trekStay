@@ -27,7 +27,7 @@ router
 
 
 //create new route rendering form only
-router.get("/new", isLoggedin , wrapAsync(controllers.rendernewDestinationForm));
+router.get("/new", isLoggedin , (controllers.rendernewDestinationForm));
 
 
 
