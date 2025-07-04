@@ -61,3 +61,34 @@ module.exports.sendBookingMail = async (req, listing) => {
 
   console.log("Booking email sent:", info);
 };
+
+module.exports.sendBookingToOwner = async (req, listing, booking) => {
+  let user = req.user;
+
+  const info = await transporter.sendMail({
+    from: '"trekStay" <yashpouranik1245@gmail.com>',
+    to: listing.owner.email,
+    subject: "📢 New Booking on Your trekStay Listing",
+    text: `Hello ${listing.owner.username}, your listing "${listing.title}" has just been booked by ${user.username}.`,
+    html: `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2>📢 New Booking Alert</h2>
+        <p>Hello <strong>${listing.owner.username}</strong>,</p>
+        <p>Your listing "<strong>${listing.title}</strong>" has just been booked by <strong>${user.username}</strong>.</p>
+        <p><strong>Booking Details:</strong></p>
+        <ul>
+          <li>📍 <strong>Location:</strong> ${listing.location}</li>
+          <li>👤 <strong>Guest:</strong> ${user.username}</li>
+          <li>📧 <strong>Email:</strong> ${user.email}</li>
+          <li>📅 <strong>From:</strong> ${booking.from.toDateString()}</li>
+          <li>📅 <strong>To:</strong> ${booking.to.toDateString()}</li>
+          <li>👥 <strong>People:</strong> ${booking.numberOfPeople}</li>
+        </ul>
+        <p>Please prepare for their stay. 🙌</p>
+        <p>Best,<br><strong>The trekStay Team</strong></p>
+      </div>
+    `,
+  });
+
+  console.log("Booking email sent to owner:", info);
+};

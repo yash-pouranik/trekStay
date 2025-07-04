@@ -1,9 +1,10 @@
 <% layout("/layout/boilerplate") %>
 <style>
-    media screen and (max-width: 600px) {
+    @media screen and (max-width: 600px) {
         form {
             width: 90% !important;
-        }   
+        }
+        
     }
 </style>
 <body>
@@ -14,7 +15,7 @@
 
         <div class="col-md-4 col-lg-10 disabled" >
             <label for="validationCustom02" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="validationCustom02" placeholder="your Name" name="name" value="<%= user1.username %>" required disabled>
+            <input type="text" class="form-control" id="validationCustom02" placeholder="your Name" name="name" value="<%= user1.username %>" required readonly>
             
         </div>
 
@@ -22,7 +23,7 @@
         <div class="col-md-4 col-lg-10">
             <label for="validationCustomUsername" class="form-label">Your Email</label>
             <div class="input-group has-validation">
-                <input type="text" class="form-control" id="validationCustomUsername" placeholder="email" name="name" value="<%= user1.email %>" required disabled>
+                <input type="text" class="form-control" id="validationCustomUsername" placeholder="email" name="name" value="<%= user1.email %>" required readonly>
             </div>
         </div>
 
@@ -53,7 +54,7 @@
 
 
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">update</button>
+            <button class="btn btn-primary" type="submit">Book!</button>
         </div>
     </form>
 </div>
